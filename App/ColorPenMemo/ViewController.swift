@@ -14,11 +14,17 @@ class ViewController: UIViewController {
     @IBOutlet weak var redView: CanvasView!
     @IBOutlet weak var greenView: CanvasView!
     @IBOutlet weak var blueView: CanvasView!
+    @IBOutlet weak var undoButton: UIBarButtonItem!
+    @IBOutlet weak var redoButton: UIBarButtonItem!
     
-    var targetCanvas: CanvasView! = nil
+    var targetCanvasStack: [CanvasView] = []
+    var targetCanvasIndex: Int = -1
+    
     var lastPoint: CGPoint = CGPoint(x: 0, y: 0)
-    var currentPen: CanvasPen!
-    var currentStroke: CanvasStroke!
+    
+    var selectedPen: CanvasPen!
+    var selectedCanvas: CanvasView!
+    var drawingStroke: CanvasStroke!
     
     var pens: [CanvasPen] = []
     var canvases: [CanvasView] = []
@@ -32,6 +38,61 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
+    private func pushTargetCanvas(canvas: CanvasView) {
+        targetCanvasStack.append(canvas)
+        targetCanvasIndex += 1
+    }
+    
+    private func shrinkTargetCanvas() {
+        let diffCount = targetCanvasStack.count - (targetCanvasIndex+1)
+        
+        if diffCount == 0 {
+            return
+        }
+        
+        targetCanvasStack.removeLast(diffCount)
+    }
+    
+    private func currentCanvas() -> CanvasView? {
+        if targetCanvasIndex >= 0 {
+            return targetCanvasStack[targetCanvasIndex]
+        } else {
+            return nil
+        }
+    }
+    
+    private func prevCanvas() -> CanvasView? {
+        if targetCanvasIndex >= 0 {
+            targetCanvasIndex -= 1
+            if targetCanvasIndex >= 0 {
+                return targetCanvasStack[targetCanvasIndex]
+            }
+        }
+        return nil
+    }
+
+    private func nextCanvas() -> CanvasView? {
+        if targetCanvasIndex < targetCanvasStack.count-1 {
+            targetCanvasIndex += 1
+            return targetCanvasStack[targetCanvasIndex]
+        }
+        return nil
+    }
+    
+    private func canUndo() -> Bool {
+        return targetCanvasIndex >= 0
+    }
+    
+    private func canRedo() -> Bool {
+        let diffCount = targetCanvasStack.count - (targetCanvasIndex+1)
+        return diffCount > 0
+    }
+    
+    private func updateUndoRedoButton() {
+        undoButton.isEnabled = canUndo()
+        redoButton.isEnabled = canRedo()
+    }
+    
     private func setup() {
         view.backgroundColor = UIColor.white
         redView.isUserInteractionEnabled = false
@@ -41,8 +102,10 @@ class ViewController: UIViewController {
         setupCanvases()
         setupPens()
         
-        currentPen = pens[0]
-        targetCanvas = redView
+        selectedPen = pens[0]
+        selectedCanvas = canvases[0]
+        
+        updateUndoRedoButton()
     }
     
     private func setupCanvases() {
@@ -64,8 +127,23 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onColorSelected(_ sender: UISegmentedControl) {
-        currentPen = pens[sender.selectedSegmentIndex]
-        targetCanvas = canvases[sender.selectedSegmentIndex]
+        selectedPen = pens[sender.selectedSegmentIndex]
+        selectedCanvas = canvases[sender.selectedSegmentIndex]
+    }
+    
+    @IBAction func onUndo(_ sender: Any) {
+        if let canvas = currentCanvas() {
+            canvas.undo()
+        }
+        let _ = prevCanvas()
+        updateUndoRedoButton()
+    }
+    
+    @IBAction func onRedo(_ sender: Any) {
+        if let canvas = nextCanvas() {
+            canvas.redo()
+        }
+        updateUndoRedoButton()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -75,9 +153,12 @@ class ViewController: UIViewController {
             return
         }
         
-        view.sendSubview(toBack: targetCanvas)
-        lastPoint = touch.location(in: targetCanvas)
-        currentStroke = CanvasStroke(pen: currentPen, points: [lastPoint])
+        shrinkTargetCanvas()
+        
+        pushTargetCanvas(canvas: selectedCanvas)
+        view.sendSubview(toBack: selectedCanvas)
+        lastPoint = touch.location(in: selectedCanvas)
+        drawingStroke = CanvasStroke(pen: selectedPen, points: [lastPoint])
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -87,18 +168,22 @@ class ViewController: UIViewController {
             return
         }
         
-        let point = touch.location(in: targetCanvas)
-        currentStroke.points.append(point)
-        targetCanvas.drawLayer(stroke: currentStroke)
+        let point = touch.location(in: targetCanvasStack.last)
+        drawingStroke.points.append(point)
+
+        selectedCanvas.drawLayer(stroke: drawingStroke)
         
         lastPoint = point
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        targetCanvas.drawObjects.append(currentStroke)
-        targetCanvas.clearLayer()
-        targetCanvas.setNeedsDisplay()
+        
+        selectedCanvas.drawObjects.append(drawingStroke)
+        selectedCanvas.clearLayer()
+        selectedCanvas.setNeedsDisplay()
+        
+        updateUndoRedoButton()
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {

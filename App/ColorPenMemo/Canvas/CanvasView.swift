@@ -11,12 +11,29 @@ import UIKit
 class CanvasView: UIView {
     
     var drawObjects: [CanvasDrawProtocol] = []
+    var undoObjects: [CanvasDrawProtocol] = []
     
     override func draw(_ rect: CGRect) {
         if let contextRef = UIGraphicsGetCurrentContext() {
             for obj in drawObjects {
                 obj.draw(contextRef: contextRef)
             }
+        }
+    }
+    
+    func undo() {
+        if let obj = drawObjects.last {
+            undoObjects.append(obj)
+            drawObjects.removeLast()
+            setNeedsDisplay()
+        }
+    }
+    
+    func redo() {
+        if let obj = undoObjects.last {
+            drawObjects.append(obj)
+            undoObjects.removeLast()
+            setNeedsDisplay()
         }
     }
     
