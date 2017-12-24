@@ -9,84 +9,63 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-    enum PenMode: Int {
-        case redPen = 0
-        case greenPen
-        case bluePen
-        case redEraser
-        case greenEraser
-        case blueEraser
-        
-        var isEraser: Bool {
-            switch self {
-            case .redPen:       return false
-            case .greenPen:     return false
-            case .bluePen:      return false
-            case .redEraser:    return true
-            case .greenEraser:  return true
-            case .blueEraser:   return true
-            }
-        }
-        
-        var color: UIColor {
-            switch self {
-            case .redPen:       return UIColor.red.withAlphaComponent(0.3)
-            case .greenPen:     return UIColor.green.withAlphaComponent(0.3)
-            case .bluePen:      return UIColor.blue.withAlphaComponent(0.3)
-            case .redEraser:    return UIColor.white
-            case .greenEraser:  return UIColor.white
-            case .blueEraser:   return UIColor.white
-            }
-        }
-        
-        var width: CGFloat {
-            switch self {
-            case .redPen:       return 5
-            case .greenPen:     return 5
-            case .bluePen:      return 5
-            case .redEraser:    return 15
-            case .greenEraser:  return 15
-            case .blueEraser:   return 15
-            }
-        }
-        
-    }
 
     @IBOutlet weak var penSelectSegment: UISegmentedControl!
     @IBOutlet weak var redView: CanvasView!
     @IBOutlet weak var greenView: CanvasView!
     @IBOutlet weak var blueView: CanvasView!
     
-    var selectedView: CanvasView! = nil
-    var startPoint: CGPoint = CGPoint(x: 0, y: 0)
-    var endPoint: CGPoint = CGPoint(x: 0, y: 0)
-    var selectedPen: PenMode = .redPen
+    var targetCanvas: CanvasView! = nil
+    var lastPoint: CGPoint = CGPoint(x: 0, y: 0)
+    var currentPen: CanvasPen!
+    var currentStroke: CanvasStroke!
+    
+    var pens: [CanvasPen] = []
+    var canvases: [CanvasView] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        redView.isUserInteractionEnabled = false
-        greenView.isUserInteractionEnabled = false
-        blueView.isUserInteractionEnabled = false
-        
-        selectedPen = .redPen
-        selectedView = redView
+        setup()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
+    private func setup() {
+        view.backgroundColor = UIColor.white
+        redView.isUserInteractionEnabled = false
+        greenView.isUserInteractionEnabled = false
+        blueView.isUserInteractionEnabled = false
+        
+        setupCanvases()
+        setupPens()
+        
+        currentPen = pens[0]
+        targetCanvas = redView
+    }
+    
+    private func setupCanvases() {
+        canvases.append(redView)
+        canvases.append(greenView)
+        canvases.append(blueView)
+        canvases.append(redView)
+        canvases.append(greenView)
+        canvases.append(blueView)
+    }
+    
+    private func setupPens() {
+        pens.append(CanvasPen(type: .pen, color: UIColor.red.withAlphaComponent(0.33).cgColor, width: 5))
+        pens.append(CanvasPen(type: .pen, color: UIColor.green.withAlphaComponent(0.33).cgColor, width: 5))
+        pens.append(CanvasPen(type: .pen, color: UIColor.blue.withAlphaComponent(0.33).cgColor, width: 5))
+        pens.append(CanvasPen(type: .eraser, color: view.backgroundColor!.cgColor, width: 15))
+        pens.append(CanvasPen(type: .eraser, color: view.backgroundColor!.cgColor, width: 15))
+        pens.append(CanvasPen(type: .eraser, color: view.backgroundColor!.cgColor, width: 15))
+    }
+    
     @IBAction func onColorSelected(_ sender: UISegmentedControl) {
-        selectedPen = PenMode(rawValue: sender.selectedSegmentIndex)!
-        switch selectedPen {
-        case .redPen:       selectedView = redView
-        case .greenPen:     selectedView = greenView
-        case .bluePen:      selectedView = blueView
-        case .redEraser:    selectedView = redView
-        case .greenEraser:  selectedView = greenView
-        case .blueEraser:   selectedView = blueView
-        }
+        currentPen = pens[sender.selectedSegmentIndex]
+        targetCanvas = canvases[sender.selectedSegmentIndex]
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -96,7 +75,9 @@ class ViewController: UIViewController {
             return
         }
         
-        startPoint = touch.location(in: selectedView)
+        view.sendSubview(toBack: targetCanvas)
+        lastPoint = touch.location(in: targetCanvas)
+        currentStroke = CanvasStroke(pen: currentPen, points: [lastPoint])
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -106,37 +87,18 @@ class ViewController: UIViewController {
             return
         }
         
-        endPoint = touch.location(in: selectedView)
+        let point = touch.location(in: targetCanvas)
+        currentStroke.points.append(point)
+        targetCanvas.drawLayer(stroke: currentStroke)
         
-        let color = selectedPen.isEraser ? view.backgroundColor! : selectedPen.color
-        let line = CanvasLine(start: startPoint,
-                              end: endPoint,
-                              isErase: selectedPen.isEraser,
-                              width: selectedPen.width,
-                              color: color)
-        
-        selectedView.lines.append(line)
-        
-        view.sendSubview(toBack: selectedView)
-        
-        let uiPath = UIBezierPath()
-        uiPath.move(to: startPoint)
-        uiPath.addLine(to: endPoint)
-
-        let shapeLayer = CAShapeLayer(layer: selectedView.layer)
-        shapeLayer.strokeColor = color.cgColor
-        shapeLayer.lineWidth = selectedPen.width
-        shapeLayer.path = uiPath.cgPath
-        selectedView.layer.addSublayer(shapeLayer)
-
-        startPoint = endPoint
+        lastPoint = point
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        
-        selectedView.layer.sublayers = nil
-        selectedView.setNeedsDisplay()
+        targetCanvas.drawObjects.append(currentStroke)
+        targetCanvas.clearLayer()
+        targetCanvas.setNeedsDisplay()
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
