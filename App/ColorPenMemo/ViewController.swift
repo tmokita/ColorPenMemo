@@ -59,8 +59,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var blueView: CanvasView!
     
     var selectedView: CanvasView! = nil
-    var isDrawing: Bool = false
-    var isErase: Bool = false
     var startPoint: CGPoint = CGPoint(x: 0, y: 0)
     var endPoint: CGPoint = CGPoint(x: 0, y: 0)
     var selectedPen: PenMode = .redPen
@@ -98,22 +96,19 @@ class ViewController: UIViewController {
             return
         }
         
-        isDrawing = true
         startPoint = touch.location(in: selectedView)
-        
     }
-    
-    
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesMoved(touches, with: event)
+        
         guard let touch = touches.first else {
             return
         }
         
         endPoint = touch.location(in: selectedView)
-        let color = selectedPen.isEraser ? view.backgroundColor! : selectedPen.color
         
+        let color = selectedPen.isEraser ? view.backgroundColor! : selectedPen.color
         let line = CanvasLine(start: startPoint,
                               end: endPoint,
                               isErase: selectedPen.isEraser,
@@ -139,18 +134,14 @@ class ViewController: UIViewController {
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesEnded(touches, with: event)
-        isDrawing = false
+        
         selectedView.layer.sublayers = nil
         selectedView.setNeedsDisplay()
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         super.touchesCancelled(touches, with: event)
-        isDrawing = false
     }
-    
-    
-
 
 }
 
