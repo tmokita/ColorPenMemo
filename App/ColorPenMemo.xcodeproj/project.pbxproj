@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		283CDF41165DDBD37B3ACE40 /* Pods_ColorPenMemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 002116F71E9408B2002FDDE6 /* Pods_ColorPenMemo.framework */; };
 		E602F9381FEFE1FE006F1056 /* CanvasStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602F9371FEFE1FE006F1056 /* CanvasStroke.swift */; };
 		E602F93E1FEFE671006F1056 /* CanvasProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602F93D1FEFE671006F1056 /* CanvasProtocol.swift */; };
 		E602F9401FEFE7CE006F1056 /* CanvasPen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602F93F1FEFE7CE006F1056 /* CanvasPen.swift */; };
@@ -19,6 +20,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		002116F71E9408B2002FDDE6 /* Pods_ColorPenMemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorPenMemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75BC6A26703F03C1D39EC032 /* Pods-ColorPenMemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorPenMemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorPenMemo/Pods-ColorPenMemo.debug.xcconfig"; sourceTree = "<group>"; };
+		7D2B2943527BB72806A567D7 /* Pods-ColorPenMemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorPenMemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColorPenMemo/Pods-ColorPenMemo.release.xcconfig"; sourceTree = "<group>"; };
 		E602F9371FEFE1FE006F1056 /* CanvasStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasStroke.swift; sourceTree = "<group>"; };
 		E602F93D1FEFE671006F1056 /* CanvasProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasProtocol.swift; sourceTree = "<group>"; };
 		E602F93F1FEFE7CE006F1056 /* CanvasPen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasPen.swift; sourceTree = "<group>"; };
@@ -37,12 +41,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				283CDF41165DDBD37B3ACE40 /* Pods_ColorPenMemo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A9E6AB6F24B82BBE9371543F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				002116F71E9408B2002FDDE6 /* Pods_ColorPenMemo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B398E3DC4CDB1E566DB23DB3 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				75BC6A26703F03C1D39EC032 /* Pods-ColorPenMemo.debug.xcconfig */,
+				7D2B2943527BB72806A567D7 /* Pods-ColorPenMemo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		E602F9361FEFE1E4006F1056 /* Canvas */ = {
 			isa = PBXGroup;
 			children = (
@@ -59,6 +81,8 @@
 			children = (
 				E6E0FABA1FEEBDE90060CC2D /* ColorPenMemo */,
 				E6E0FAB91FEEBDE90060CC2D /* Products */,
+				B398E3DC4CDB1E566DB23DB3 /* Pods */,
+				A9E6AB6F24B82BBE9371543F /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -91,9 +115,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E6E0FACA1FEEBDE90060CC2D /* Build configuration list for PBXNativeTarget "ColorPenMemo" */;
 			buildPhases = (
+				4DFECE4CD46F8B1494B3F6EB /* [CP] Check Pods Manifest.lock */,
 				E6E0FAB41FEEBDE90060CC2D /* Sources */,
 				E6E0FAB51FEEBDE90060CC2D /* Frameworks */,
 				E6E0FAB61FEEBDE90060CC2D /* Resources */,
+				EBA7B8DBE1A8E563E5D656B8 /* [CP] Embed Pods Frameworks */,
+				595334B07B7B05D012835FD3 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -150,6 +177,62 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		4DFECE4CD46F8B1494B3F6EB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ColorPenMemo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		595334B07B7B05D012835FD3 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorPenMemo/Pods-ColorPenMemo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EBA7B8DBE1A8E563E5D656B8 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ColorPenMemo/Pods-ColorPenMemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ColorPenMemo/Pods-ColorPenMemo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E6E0FAB41FEEBDE90060CC2D /* Sources */ = {
@@ -296,6 +379,7 @@
 		};
 		E6E0FACB1FEEBDE90060CC2D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 75BC6A26703F03C1D39EC032 /* Pods-ColorPenMemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -311,6 +395,7 @@
 		};
 		E6E0FACC1FEEBDE90060CC2D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7D2B2943527BB72806A567D7 /* Pods-ColorPenMemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
