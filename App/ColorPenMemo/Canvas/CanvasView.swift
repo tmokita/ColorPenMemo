@@ -63,5 +63,18 @@ class CanvasView: UIView {
     func clearLayer() {
         layer.sublayers = nil
     }
+    
+    func rasterizeImage() -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(frame.size, false, 1)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return nil
+        }
+        layer.render(in: context)
+        guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
+            return nil
+        }
+        UIGraphicsEndImageContext()
+        return image
+    }
 
 }

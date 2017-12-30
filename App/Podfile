@@ -1,0 +1,10 @@
+platform :ios, '11.0'
+use_frameworks!
+
+def install_pods
+	pod 'RealmSwift'
+end
+
+target 'ColorPenMemo' do
+	install_pods
+end
