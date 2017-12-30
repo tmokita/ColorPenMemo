@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "PalletBackgroundActive.png",
+      "filename" : "PaletteBackgroundActive.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "PalletBackgroundActive@2x.png",
+      "filename" : "PaletteBackgroundActive@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "PalletBackgroundActive@3x.png",
+      "filename" : "PaletteBackgroundActive@3x.png",
       "scale" : "3x"
     }
   ],
