@@ -49,7 +49,7 @@ class CanvasToolbarRadioButtons: UIView {
     private func addButton(name:String) {
         let activeImg = UIImage(named: name + "Active")!
         let deactiveImg = UIImage(named: name + "Deactive")!
-        
+
         let x = self.frame.width
         let btn = UIButton(frame: CGRect(origin: CGPoint(x: x, y: 0), size: activeImg.size))
         btn.accessibilityValue = name

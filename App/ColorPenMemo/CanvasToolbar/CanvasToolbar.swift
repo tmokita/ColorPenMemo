@@ -86,6 +86,23 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     var cutLayerImages:[String] = ["CutSingle", "CutMultiple"]
     var cutLayerMenu:CanvasToolbarRadioButtons?
     
+    public var undoIsEnabled:Bool {
+        set {
+            undoBtn.isEnabled = newValue
+        }
+        get {
+            return undoBtn.isEnabled
+        }
+    }
+
+    public var redoIsEnabled:Bool {
+        set {
+            redoBtn.isEnabled = newValue
+        }
+        get {
+            return redoBtn.isEnabled
+        }
+    }
     // 対象レイヤーが1枚か全部か
     enum Layer {
         case single
@@ -385,7 +402,12 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         btn.setImage(deactiveImg, for: .normal)
         btn.setImage(activeImg, for: .selected)
         btn.setImage(activeImg, for: .highlighted)
-
+        
+        let disableImg = UIImage(named: "\(name)Disable")
+        if let disableImg = disableImg {
+            btn.setImage(disableImg, for: .disabled)
+        }
+        
         btn.addTarget(self, action: action, for: .touchUpInside)
         
         if longPressAction != nil {

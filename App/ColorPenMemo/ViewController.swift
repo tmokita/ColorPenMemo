@@ -39,6 +39,8 @@ class ViewController: UIViewController {
         let middle = Int(UIScreen.main.bounds.height - toolbar.frame.height) / 2
         toolbar.frame = CGRect(origin: CGPoint(x:0, y:middle), size: toolbar.frame.size)
         self.view.addSubview(toolbar)
+        // toolbar.redoIsEnabled = false
+        // toolbar.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
