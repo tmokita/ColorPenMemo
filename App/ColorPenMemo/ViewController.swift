@@ -28,10 +28,17 @@ class ViewController: UIViewController {
     
     var pens: [CanvasPen] = []
     var canvases: [CanvasView] = []
+    
+    var toolbar:CanvasToolbar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
+        
+        toolbar = CanvasToolbar(colors: [UIColor.gray, UIColor.red, UIColor.blue, UIColor.green, UIColor.brown, UIColor.cyan])
+        let middle = Int(UIScreen.main.bounds.height - toolbar.frame.height) / 2
+        toolbar.frame = CGRect(origin: CGPoint(x:0, y:middle), size: toolbar.frame.size)
+        self.view.addSubview(toolbar)
     }
     
     override func didReceiveMemoryWarning() {
