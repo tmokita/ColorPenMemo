@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol CanvasToolbarDelegate {
+public protocol CanvasToolbarDelegate {
     // 種類をペン、消しゴム、カットから選択
     func changePenState(penState:CanvasToolbar.PenState) -> Bool
     
@@ -29,7 +29,7 @@ protocol CanvasToolbarDelegate {
     func didPressExit()
 }
 
-class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
+public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     public var delegate:CanvasToolbarDelegate?
     
     var drawBtn:UIButton!
@@ -86,6 +86,8 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     var cutLayerImages:[String] = ["CutSingle", "CutMultiple"]
     var cutLayerMenu:CanvasToolbarRadioButtons?
     
+    var bundle:Bundle!
+    
     public var undoIsEnabled:Bool {
         set {
             undoBtn.isEnabled = newValue
@@ -104,13 +106,13 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         }
     }
     // 対象レイヤーが1枚か全部か
-    enum Layer {
+    public enum Layer {
         case single
         case multiple
     }
     
     // 選択されてるペンの状態
-    enum PenState {
+    public enum PenState {
         case draw
         case eraseSingle
         case eraseMultiple
@@ -119,7 +121,7 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     }
     
     // 表示されているsubmenu
-    enum SubMenu {
+    public enum SubMenu {
         case none
         case erase
         case cut
@@ -186,17 +188,29 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     }
 
     // 初期化してボタンを配置
-    init(colors:[UIColor]) {
+    public init(colors:[UIColor]) {
         self.colors = colors
         self.activeColors = colors.map { _ in true }
         
         super.init(frame: CGRect.zero)
 
+        loadBundle()
+        
         createPenStateButtons()
         createPalette()
         createActionButtons()
         createSubmenus()
-        
+        setInitValues()
+    }
+    
+    func loadBundle() {
+        let podBundle = Bundle(for: self.classForCoder)
+        let bundleURL = podBundle.url(forResource: "CanvasToolbar", withExtension: "bundle")!
+        bundle = Bundle(url: bundleURL)!
+    }
+    
+    private func setInitValues() {
+        colorIndex = 0
         drawWeight = 8
         eraseLayer = .single
         cutLayer = .multiple
@@ -205,7 +219,7 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     // パレットを生成
     private func createPalette() {
         paletteBG = UIImageView(frame: CGRect(x: 0, y: 288, width: 64, height: 256))
-        paletteBG.image = UIImage(named: "PaletteBackgroundActive")
+        paletteBG.image = loadImage("PaletteBackgroundActive")
         addSubview(paletteBG)
 
         for (index, color) in colors.enumerated() {
@@ -219,7 +233,7 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         }
         
         // カーソル
-        let cursorImage = UIImage(named: "PaletteSelectActive")!
+        let cursorImage = loadImage("PaletteSelectActive")!
         paletteCursor = UIImageView(frame: CGRect(origin: CGPoint.zero, size: cursorImage.size))
         paletteCursor.image = cursorImage
         paletteCursor.isUserInteractionEnabled = false
@@ -393,8 +407,8 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     
     // イメージ付きボタンを生成
     private func addButton(name:String, x: Int, y:Int, action:Selector, longPressAction:Selector? = nil) -> UIButton {
-        let activeImg = UIImage(named: "\(name)Active")!
-        let deactiveImg = UIImage(named: "\(name)Deactive")!
+        let activeImg = loadImage("\(name)Active")!
+        let deactiveImg = loadImage("\(name)Deactive")!
         
         let btn = UIButton(frame: CGRect(origin: CGPoint(x: x, y: y), size: activeImg.size))
         btn.accessibilityValue = name
@@ -403,7 +417,7 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         btn.setImage(activeImg, for: .selected)
         btn.setImage(activeImg, for: .highlighted)
         
-        let disableImg = UIImage(named: "\(name)Disable")
+        let disableImg = loadImage("\(name)Disable")
         if let disableImg = disableImg {
             btn.setImage(disableImg, for: .disabled)
         }
@@ -440,8 +454,12 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         }
     }
     
+    func loadImage(_ named:String) -> UIImage? {
+        return UIImage(named: named, in: bundle, compatibleWith: nil)
+    }
+    
     // frame外のsubviewもtapできる様にする
-    override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    override public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         for subview in subviews {
             if subview.frame.contains(point) {
                 return true
@@ -452,7 +470,7 @@ class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     }
     
     // UIViewを継承したクラスには必要?
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }

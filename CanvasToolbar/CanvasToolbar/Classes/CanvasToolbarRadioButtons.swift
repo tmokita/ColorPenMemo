@@ -18,6 +18,7 @@ class CanvasToolbarRadioButtons: UIView {
     var name:String?
     var buttons:[UIButton] = []
     let images:[String]
+    var bundle:Bundle!
     var value:String = "" {
         didSet(oldValue) {
             for button in buttons {
@@ -32,7 +33,14 @@ class CanvasToolbarRadioButtons: UIView {
     init(origin:CGPoint, images:[String]) {
         self.images = images
         super.init(frame: CGRect(origin: origin, size: CGSize.zero))
+        loadBundle()
         createButtons()
+    }
+    
+    func loadBundle() {
+        let podBundle = Bundle(for: self.classForCoder)
+        let bundleURL = podBundle.url(forResource: "CanvasToolbar", withExtension: "bundle")!
+        bundle = Bundle(url: bundleURL)!
     }
     
     private func createButtons() {
@@ -47,8 +55,8 @@ class CanvasToolbarRadioButtons: UIView {
     }
     
     private func addButton(name:String) {
-        let activeImg = UIImage(named: name + "Active")!
-        let deactiveImg = UIImage(named: name + "Deactive")!
+        let activeImg = loadImage(name + "Active")!
+        let deactiveImg = loadImage(name + "Deactive")!
 
         let x = self.frame.width
         let btn = UIButton(frame: CGRect(origin: CGPoint(x: x, y: 0), size: activeImg.size))
@@ -86,6 +94,9 @@ class CanvasToolbarRadioButtons: UIView {
         self.value = value
     }
     
+    func loadImage(_ named:String) -> UIImage? {
+        return UIImage(named: named, in: bundle, compatibleWith: nil)
+    }
     // UIViewを継承したクラスには必要?
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

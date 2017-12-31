@@ -1,8 +1,8 @@
 #!/bin/bash -l
 # based on https://github.com/gliyao/SketchToXcode
 
-PROJECT_NAME="App/ColorPenMemo"
-SKETCH_FILE="Design/Draw1.sketch"
+PROJECT_NAME="CanvasToolbar/Assets"
+SKETCH_FILE="../Design/Draw1.sketch"
 
 PROJECT_DIR=`pwd`
 ICONS_DIR="$PROJECT_DIR"/"Icons"

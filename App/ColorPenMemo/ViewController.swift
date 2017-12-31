@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CanvasToolbar
 
 class ViewController: UIViewController {
 
@@ -35,7 +36,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setup()
         
-        toolbar = CanvasToolbar(colors: [UIColor.gray, UIColor.red, UIColor.blue, UIColor.green, UIColor.brown, UIColor.cyan])
+        toolbar = CanvasToolbar(colors: [.gray, .red, .blue, .green, .brown, .cyan])
         let middle = Int(UIScreen.main.bounds.height - toolbar.frame.height) / 2
         toolbar.frame = CGRect(origin: CGPoint(x:0, y:middle), size: toolbar.frame.size)
         self.view.addSubview(toolbar)

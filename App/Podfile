@@ -3,6 +3,7 @@ use_frameworks!
 
 def install_pods
 	pod 'RealmSwift'
+	pod 'CanvasToolbar', path: '../CanvasToolbar'
 end
 
 target 'ColorPenMemo' do

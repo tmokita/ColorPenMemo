@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		591A31761FF5D368007B45AB /* Sketch.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 591A31751FF5D368007B45AB /* Sketch.xcassets */; };
-		59E52C071FF7372E009B3839 /* CanvasToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E52C061FF7372E009B3839 /* CanvasToolbar.swift */; };
-		59E52C0C1FF7B766009B3839 /* CanvasToolbarRadioButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E52C0B1FF7B766009B3839 /* CanvasToolbarRadioButtons.swift */; };
 		9C18B6ADD58096D778A5ED48 /* Pods_ColorPenMemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D52A40FBBEC8760A2BBFD3A /* Pods_ColorPenMemo.framework */; };
 		E602F9381FEFE1FE006F1056 /* CanvasStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602F9371FEFE1FE006F1056 /* CanvasStroke.swift */; };
 		E602F93E1FEFE671006F1056 /* CanvasProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602F93D1FEFE671006F1056 /* CanvasProtocol.swift */; };
@@ -24,9 +21,6 @@
 
 /* Begin PBXFileReference section */
 		4D52A40FBBEC8760A2BBFD3A /* Pods_ColorPenMemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ColorPenMemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		591A31751FF5D368007B45AB /* Sketch.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sketch.xcassets; sourceTree = "<group>"; };
-		59E52C061FF7372E009B3839 /* CanvasToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasToolbar.swift; sourceTree = "<group>"; };
-		59E52C0B1FF7B766009B3839 /* CanvasToolbarRadioButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasToolbarRadioButtons.swift; sourceTree = "<group>"; };
 		C94AE87D0E86BBD8D8172093 /* Pods-ColorPenMemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorPenMemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-ColorPenMemo/Pods-ColorPenMemo.release.xcconfig"; sourceTree = "<group>"; };
 		E4F35934136A03CF3D264B73 /* Pods-ColorPenMemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ColorPenMemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ColorPenMemo/Pods-ColorPenMemo.debug.xcconfig"; sourceTree = "<group>"; };
 		E602F9371FEFE1FE006F1056 /* CanvasStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasStroke.swift; sourceTree = "<group>"; };
@@ -60,15 +54,6 @@
 				4D52A40FBBEC8760A2BBFD3A /* Pods_ColorPenMemo.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		59E52C0A1FF7B6AF009B3839 /* CanvasToolbar */ = {
-			isa = PBXGroup;
-			children = (
-				59E52C061FF7372E009B3839 /* CanvasToolbar.swift */,
-				59E52C0B1FF7B766009B3839 /* CanvasToolbarRadioButtons.swift */,
-			);
-			path = CanvasToolbar;
 			sourceTree = "<group>";
 		};
 		79BE7F42E72259BBFC56970D /* Pods */ = {
@@ -112,7 +97,6 @@
 		E6E0FABA1FEEBDE90060CC2D /* ColorPenMemo */ = {
 			isa = PBXGroup;
 			children = (
-				59E52C0A1FF7B6AF009B3839 /* CanvasToolbar */,
 				E602F9361FEFE1E4006F1056 /* Canvas */,
 				E6E0FABB1FEEBDE90060CC2D /* AppDelegate.swift */,
 				E6E0FABD1FEEBDE90060CC2D /* ViewController.swift */,
@@ -120,7 +104,6 @@
 				E6E0FAC21FEEBDE90060CC2D /* Assets.xcassets */,
 				E6E0FAC41FEEBDE90060CC2D /* LaunchScreen.storyboard */,
 				E6E0FAC71FEEBDE90060CC2D /* Info.plist */,
-				591A31751FF5D368007B45AB /* Sketch.xcassets */,
 			);
 			path = ColorPenMemo;
 			sourceTree = "<group>";
@@ -188,7 +171,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E6E0FAC61FEEBDE90060CC2D /* LaunchScreen.storyboard in Resources */,
-				591A31761FF5D368007B45AB /* Sketch.xcassets in Resources */,
 				E6E0FAC31FEEBDE90060CC2D /* Assets.xcassets in Resources */,
 				E6E0FAC11FEEBDE90060CC2D /* Main.storyboard in Resources */,
 			);
@@ -222,11 +204,13 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ColorPenMemo/Pods-ColorPenMemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CanvasToolbar/CanvasToolbar.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CanvasToolbar.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
@@ -263,8 +247,6 @@
 				E602F93E1FEFE671006F1056 /* CanvasProtocol.swift in Sources */,
 				E6E0FABC1FEEBDE90060CC2D /* AppDelegate.swift in Sources */,
 				E6E0FAD01FEED8ED0060CC2D /* CanvasView.swift in Sources */,
-				59E52C071FF7372E009B3839 /* CanvasToolbar.swift in Sources */,
-				59E52C0C1FF7B766009B3839 /* CanvasToolbarRadioButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

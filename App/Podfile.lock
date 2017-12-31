@@ -1,4 +1,5 @@
 PODS:
+  - CanvasToolbar (0.1.0)
   - Realm (3.0.2):
     - Realm/Headers (= 3.0.2)
   - Realm/Headers (3.0.2)
@@ -6,12 +7,18 @@ PODS:
     - Realm (= 3.0.2)
 
 DEPENDENCIES:
+  - CanvasToolbar (from `../CanvasToolbar`)
   - RealmSwift
 
+EXTERNAL SOURCES:
+  CanvasToolbar:
+    :path: ../CanvasToolbar
+
 SPEC CHECKSUMS:
+  CanvasToolbar: 4957880db35b3a4a7fa3bceccb622c94618f2dcd
   Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
   RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
 
-PODFILE CHECKSUM: 85acc8398558ca07f11c98be210571af457e7b97
+PODFILE CHECKSUM: 4e82337931333610b7594d024837f7d52c26d39e
 
 COCOAPODS: 1.3.1
