@@ -119,6 +119,10 @@ class ViewController: UIViewController {
     }
     
     private func setupCanvases() {
+        redView.name = "red"
+        greenView.name = "green"
+        blueView.name = "blue"
+        
         canvases.append(redView)
         canvases.append(greenView)
         canvases.append(blueView)
@@ -192,6 +196,13 @@ class ViewController: UIViewController {
         selectedCanvas.drawObjects.append(drawingStroke)
         selectedCanvas.clearLayer()
         selectedCanvas.setNeedsDisplay()
+        
+        if let image = selectedCanvas.rasterizeImage() {
+            let history = DrawingHistory()
+            history.canvasName = selectedCanvas.name
+            history.image = UIImagePNGRepresentation(image)
+            RealmService.addHistory(history: history)
+        }
         
         updateUndoRedoButton()
     }

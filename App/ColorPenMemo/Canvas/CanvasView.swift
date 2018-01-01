@@ -13,6 +13,8 @@ class CanvasView: UIView {
     var drawObjects: [CanvasDrawProtocol] = []
     var undoObjects: [CanvasDrawProtocol] = []
     
+    var name: String = ""
+    
     override func draw(_ rect: CGRect) {
         if let contextRef = UIGraphicsGetCurrentContext() {
             for obj in drawObjects {
