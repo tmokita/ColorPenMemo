@@ -11,12 +11,15 @@
 		E602F9381FEFE1FE006F1056 /* CanvasStroke.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602F9371FEFE1FE006F1056 /* CanvasStroke.swift */; };
 		E602F93E1FEFE671006F1056 /* CanvasProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602F93D1FEFE671006F1056 /* CanvasProtocol.swift */; };
 		E602F9401FEFE7CE006F1056 /* CanvasPen.swift in Sources */ = {isa = PBXBuildFile; fileRef = E602F93F1FEFE7CE006F1056 /* CanvasPen.swift */; };
+		E657CF701FFAA17F00D87B31 /* Realm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E657CF6E1FFAA17F00D87B31 /* Realm.framework */; };
+		E657CF711FFAA17F00D87B31 /* RealmSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E657CF6F1FFAA17F00D87B31 /* RealmSwift.framework */; };
 		E6E0FABC1FEEBDE90060CC2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E0FABB1FEEBDE90060CC2D /* AppDelegate.swift */; };
 		E6E0FABE1FEEBDE90060CC2D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E0FABD1FEEBDE90060CC2D /* ViewController.swift */; };
 		E6E0FAC11FEEBDE90060CC2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6E0FABF1FEEBDE90060CC2D /* Main.storyboard */; };
 		E6E0FAC31FEEBDE90060CC2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E6E0FAC21FEEBDE90060CC2D /* Assets.xcassets */; };
 		E6E0FAC61FEEBDE90060CC2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E6E0FAC41FEEBDE90060CC2D /* LaunchScreen.storyboard */; };
 		E6E0FAD01FEED8ED0060CC2D /* CanvasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E0FACF1FEED8ED0060CC2D /* CanvasView.swift */; };
+		E6E20EE01FFA94B100F2F5FD /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6E20EDF1FFA94B100F2F5FD /* RealmService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,8 @@
 		E602F9371FEFE1FE006F1056 /* CanvasStroke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasStroke.swift; sourceTree = "<group>"; };
 		E602F93D1FEFE671006F1056 /* CanvasProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasProtocol.swift; sourceTree = "<group>"; };
 		E602F93F1FEFE7CE006F1056 /* CanvasPen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasPen.swift; sourceTree = "<group>"; };
+		E657CF6E1FFAA17F00D87B31 /* Realm.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Realm.framework; path = Libs/Realm.framework; sourceTree = "<group>"; };
+		E657CF6F1FFAA17F00D87B31 /* RealmSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RealmSwift.framework; path = Libs/RealmSwift.framework; sourceTree = "<group>"; };
 		E6E0FAB81FEEBDE90060CC2D /* ColorPenMemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ColorPenMemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E6E0FABB1FEEBDE90060CC2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E6E0FABD1FEEBDE90060CC2D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -34,6 +39,7 @@
 		E6E0FAC51FEEBDE90060CC2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E6E0FAC71FEEBDE90060CC2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E6E0FACF1FEED8ED0060CC2D /* CanvasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanvasView.swift; sourceTree = "<group>"; };
+		E6E20EDF1FFA94B100F2F5FD /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,7 +47,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E657CF701FFAA17F00D87B31 /* Realm.framework in Frameworks */,
 				9C18B6ADD58096D778A5ED48 /* Pods_ColorPenMemo.framework in Frameworks */,
+				E657CF711FFAA17F00D87B31 /* RealmSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,6 +59,8 @@
 		1DA1228CD0742A7191E175E5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E657CF6E1FFAA17F00D87B31 /* Realm.framework */,
+				E657CF6F1FFAA17F00D87B31 /* RealmSwift.framework */,
 				4D52A40FBBEC8760A2BBFD3A /* Pods_ColorPenMemo.framework */,
 			);
 			name = Frameworks;
@@ -97,6 +107,7 @@
 		E6E0FABA1FEEBDE90060CC2D /* ColorPenMemo */ = {
 			isa = PBXGroup;
 			children = (
+				E6E20EDE1FFA949300F2F5FD /* Services */,
 				E602F9361FEFE1E4006F1056 /* Canvas */,
 				E6E0FABB1FEEBDE90060CC2D /* AppDelegate.swift */,
 				E6E0FABD1FEEBDE90060CC2D /* ViewController.swift */,
@@ -106,6 +117,22 @@
 				E6E0FAC71FEEBDE90060CC2D /* Info.plist */,
 			);
 			path = ColorPenMemo;
+			sourceTree = "<group>";
+		};
+		E6E20EDE1FFA949300F2F5FD /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E6E20EE11FFA955E00F2F5FD /* Realm */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		E6E20EE11FFA955E00F2F5FD /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				E6E20EDF1FFA94B100F2F5FD /* RealmService.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,14 +232,10 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ColorPenMemo/Pods-ColorPenMemo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CanvasToolbar/CanvasToolbar.framework",
-				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
-				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CanvasToolbar.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -243,6 +266,7 @@
 			files = (
 				E6E0FABE1FEEBDE90060CC2D /* ViewController.swift in Sources */,
 				E602F9401FEFE7CE006F1056 /* CanvasPen.swift in Sources */,
+				E6E20EE01FFA94B100F2F5FD /* RealmService.swift in Sources */,
 				E602F9381FEFE1FE006F1056 /* CanvasStroke.swift in Sources */,
 				E602F93E1FEFE671006F1056 /* CanvasProtocol.swift in Sources */,
 				E6E0FABC1FEEBDE90060CC2D /* AppDelegate.swift in Sources */,
@@ -386,6 +410,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JWTTB78962;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libs",
+				);
 				INFOPLIST_FILE = ColorPenMemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tmokita.ColorPenMemo;
@@ -402,6 +430,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JWTTB78962;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Libs",
+				);
 				INFOPLIST_FILE = ColorPenMemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.tmokita.ColorPenMemo;
