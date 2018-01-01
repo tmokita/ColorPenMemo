@@ -1,0 +1,14 @@
+language: ruby
+# only run CI-builds on master branch
+branches:
+  only:
+  - master
+rvm:
+- 2.2.3
+# set execution permission on our build script
+#before_script:
+# - chmod +x ./scripts/generate_docs.sh
+# path to our build script. 
+# Travis will run `bundle install` by default before running our script
+script: sh ./scripts/ci_docs.sh
+sudo: false
