@@ -51,16 +51,31 @@ class CanvasView: UIView {
             }
         }
         
-        let shapeLayer = CAShapeLayer(layer: self.layer)
-        shapeLayer.strokeColor = stroke.pen.color
-        shapeLayer.lineWidth = stroke.pen.width
-        shapeLayer.fillColor = UIColor.clear.cgColor
-        shapeLayer.path = uiPath.cgPath
-        
-        layer.addSublayer(shapeLayer)
+        UIGraphicsBeginImageContext(self.frame.size);
+        if let context = UIGraphicsGetCurrentContext() {
+            for obj in drawObjects {
+                obj.draw(contextRef: context)
+            }
+            
+            
+            let imageRef = context.makeImage()
+            let newLayer = CALayer(layer: layer)
+            newLayer.contents = imageRef
+            layer.addSublayer(newLayer)
+        }
+        UIGraphicsEndImageContext();
+
+//        let shapeLayer = CAShapeLayer(layer: self.layer)
+//        shapeLayer.strokeColor = stroke.pen.color
+//        shapeLayer.lineWidth = stroke.pen.width
+//        shapeLayer.fillColor = UIColor.clear.cgColor
+//        shapeLayer.path = uiPath.cgPath
+//
+//        layer.addSublayer(shapeLayer)
     }
     
     func clearLayer() {
+        //layer.contents = nil
         layer.sublayers = nil
     }
     
