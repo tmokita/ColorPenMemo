@@ -1,7 +1,9 @@
 #!/bin/sh
 
+mkdir -p _site
+rm _site/*
+
 jazzy \
-  --clean \
   --output _site \
   --min-acl public \
   --podspec CanvasToolbar/CanvasToolbar.podspec
