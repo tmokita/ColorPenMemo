@@ -8,8 +8,16 @@
 
 import UIKit
 
+/*
+*/
 public protocol CanvasToolbarDelegate {
-    // 種類をペン、消しゴム、カットから選択
+    /**
+     種類をペン、消しゴム、カットから選択
+
+     - parameter penState: これから変更されるペンの状態
+
+     - returns 変更の許可不許可
+    */
     func changePenState(penState:CanvasToolbar.PenState) -> Bool
     
     // 色を変更
