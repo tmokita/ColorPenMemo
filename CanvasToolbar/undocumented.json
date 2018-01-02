@@ -2,70 +2,91 @@
   "warnings": [
     {
       "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
-      "line": 39,
+      "line": 43,
       "symbol": "CanvasToolbarDelegate.didPressRedo()",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
-      "line": 159,
+      "line": 156,
       "symbol": "CanvasToolbar.Layer.single",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
-      "line": 160,
+      "line": 157,
       "symbol": "CanvasToolbar.Layer.multiple",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
-      "line": 165,
+      "line": 162,
       "symbol": "CanvasToolbar.PenState.draw",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
-      "line": 166,
+      "line": 163,
       "symbol": "CanvasToolbar.PenState.eraseSingle",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
-      "line": 167,
+      "line": 164,
       "symbol": "CanvasToolbar.PenState.eraseMultiple",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
-      "line": 168,
+      "line": 165,
       "symbol": "CanvasToolbar.PenState.cutSingle",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
-      "line": 169,
+      "line": 166,
       "symbol": "CanvasToolbar.PenState.cutMultiple",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
     {
       "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
-      "line": 533,
+      "line": 171,
+      "symbol": "CanvasToolbar.DrawWeight.small",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
+      "line": 172,
+      "symbol": "CanvasToolbar.DrawWeight.medium",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
+      "line": 173,
+      "symbol": "CanvasToolbar.DrawWeight.large",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
+      "line": 535,
       "symbol": "CanvasToolbar.point(inside:with:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"
     },
     {
       "file": "/Users/masuidrive/Develop/personal/ColorPenMemo/CanvasToolbar/CanvasToolbar/Classes/CanvasToolbar.swift",
-      "line": 544,
+      "line": 546,
       "symbol": "CanvasToolbar.init(coder:)",
       "symbol_kind": "source.lang.swift.decl.function.method.instance",
       "warning": "undocumented"

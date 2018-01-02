@@ -14,7 +14,7 @@
     <a title="CanvasToolbarDelegate Protocol Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="../index.html">CanvasToolbar Docs</a> (70% documented)</p>
+        <p><a href="../index.html">CanvasToolbar Docs</a> (66% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -38,6 +38,9 @@
               </li>
               <li class="nav-group-task">
                 <a href="../Classes/CanvasToolbar/PenState.html">– PenState</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CanvasToolbar/DrawWeight.html">– DrawWeight</a>
               </li>
             </ul>
           </li>
@@ -70,9 +73,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13CanvasToolbar0aB8DelegateP18willChangePenStateSbA2AC0fG0O03penG0_tF"></a>
-                    <a name="//apple_ref/swift/Method/willChangePenState(penState:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP18willChangePenStateSbA2AC0fG0O03penG0_tF">willChangePenState(penState:)</a>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP17didChangePenStateyA2AC0fG0O03penG0_tF"></a>
+                    <a name="//apple_ref/swift/Method/didChangePenState(penState:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP17didChangePenStateyA2AC0fG0O03penG0_tF">didChangePenState(penState:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -87,7 +90,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">willChangePenState</span><span class="p">(</span><span class="nv">penState</span><span class="p">:</span><span class="kt"><a href="../Classes/CanvasToolbar.html">CanvasToolbar</a></span><span class="o">.</span><span class="kt">PenState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didChangePenState</span><span class="p">(</span><span class="nv">penState</span><span class="p">:</span><span class="kt"><a href="../Classes/CanvasToolbar.html">CanvasToolbar</a></span><span class="o">.</span><span class="kt">PenState</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -103,16 +106,12 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>これから変更されるペンの状態</p>
+                                  <p>新しいペンの状態</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>変更の許可不許可</p>
                       </div>
                     </section>
                   </div>
@@ -120,9 +119,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13CanvasToolbar0aB8DelegateP15willChangeColorSbSi10colorIndex_tF"></a>
-                    <a name="//apple_ref/swift/Method/willChangeColor(colorIndex:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP15willChangeColorSbSi10colorIndex_tF">willChangeColor(colorIndex:)</a>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP14didChangeColorySi10colorIndex_tF"></a>
+                    <a name="//apple_ref/swift/Method/didChangeColor(colorIndex:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP14didChangeColorySi10colorIndex_tF">didChangeColor(colorIndex:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -137,7 +136,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">willChangeColor</span><span class="p">(</span><span class="nv">colorIndex</span><span class="p">:</span><span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didChangeColor</span><span class="p">(</span><span class="nv">colorIndex</span><span class="p">:</span><span class="kt">Int</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -153,16 +152,12 @@
                               </td>
                               <td>
                                 <div>
-                                  <p>変更されるカラー番号(colorsのインデックス)</p>
+                                  <p>新しいカラー番号(colorsのインデックス)</p>
                                 </div>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                      </div>
-                      <div>
-                        <h4>Return Value</h4>
-                        <p>変更の許可不許可</p>
                       </div>
                     </section>
                   </div>
@@ -170,9 +165,55 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:13CanvasToolbar0aB8DelegateP19didChangeDrawWeightySi6weight_tF"></a>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP21didChangeActiveColorsySaySbG06activeG0_tF"></a>
+                    <a name="//apple_ref/swift/Method/didChangeActiveColors(activeColors:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP21didChangeActiveColorsySaySbG06activeG0_tF">didChangeActiveColors(activeColors:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>アクティブな色を変更</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didChangeActiveColors</span><span class="p">(</span><span class="nv">activeColors</span><span class="p">:[</span><span class="kt">Bool</span><span class="p">])</span> <span class="c1">// 未実装</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>activeColors</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>新しいアクティブな色</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP19didChangeDrawWeightyA2AC0fG0O6weight_tF"></a>
                     <a name="//apple_ref/swift/Method/didChangeDrawWeight(weight:)" class="dashAnchor"></a>
-                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP19didChangeDrawWeightySi6weight_tF">didChangeDrawWeight(weight:)</a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP19didChangeDrawWeightyA2AC0fG0O6weight_tF">didChangeDrawWeight(weight:)</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -187,7 +228,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didChangeDrawWeight</span><span class="p">(</span><span class="nv">weight</span><span class="p">:</span><span class="kt">Int</span><span class="p">)</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didChangeDrawWeight</span><span class="p">(</span><span class="nv">weight</span><span class="p">:</span><span class="kt"><a href="../Classes/CanvasToolbar.html">CanvasToolbar</a></span><span class="o">.</span><span class="kt">DrawWeight</span><span class="p">)</span></code></pre>
 
                         </div>
                       </div>
@@ -434,7 +475,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2018 <a class="link" href="https://github.com/Yuichiro MASUI/CanvasToolbar" target="_blank" rel="external">Yuichiro MASUI</a>. All rights reserved. (Last updated: 2018-01-02)</p>
+          <p>&copy; 2018 <a class="link" href="https://github.com/Yuichiro MASUI/CanvasToolbar" target="_blank" rel="external">Yuichiro MASUI</a>. All rights reserved. (Last updated: 2018-01-03)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
