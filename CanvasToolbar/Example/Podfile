@@ -3,6 +3,7 @@ use_frameworks!
 
 target 'CanvasToolbar_Example' do
   pod 'CanvasToolbar', :path => '../'
+  pod 'PKHUD', '~> 5.0'
 
   target 'CanvasToolbar_Tests' do
     inherit! :search_paths

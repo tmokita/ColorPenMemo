@@ -1,13 +1,26 @@
 # CanvasToolbar
 
-[![CI Status](http://img.shields.io/travis/Yuichiro MASUI/CanvasToolbar.svg?style=flat)](https://travis-ci.org/Yuichiro MASUI/CanvasToolbar)
-[![Version](https://img.shields.io/cocoapods/v/CanvasToolbar.svg?style=flat)](http://cocoapods.org/pods/CanvasToolbar)
-[![License](https://img.shields.io/cocoapods/l/CanvasToolbar.svg?style=flat)](http://cocoapods.org/pods/CanvasToolbar)
-[![Platform](https://img.shields.io/cocoapods/p/CanvasToolbar.svg?style=flat)](http://cocoapods.org/pods/CanvasToolbar)
+お絵かきアプリ内部で使うツールバー
+
+
 
 ## Example
 
-To run the example project, clone the repo, and run `pod install` from the Example directory first.
+サンプルは[Example/ViewController.swift](https://github.com/tmokita/ColorPenMemo/blob/master/CanvasToolbar/Example/CanvasToolbar/ViewController.swift)を参照してください
+
+```Sample.swift
+ // パレットの色を指定して生成’
+ let toolbar = CanvasToolbar(colors: [.gray, .red, .blue, .green, .brown, .cyan])
+ toolbar.delegate = self
+
+ // センターに表示する
+ let middle = Int(UIScreen.main.bounds.height - toolbar.frame.height) / 2
+ toolbar.frame = CGRect(origin: CGPoint(x:0, y:middle), size: toolbar.frame.size)
+ 
+ self.view.addSubview(toolbar)
+ ```
+
+ボタンが押されたり、色が変更された通知はdelegateで来ます。
 
 ## Requirements
 
@@ -17,7 +30,7 @@ CanvasToolbar is available through [CocoaPods](http://cocoapods.org). To install
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'CanvasToolbar'
+pod 'CanvasToolbar', path: "../CanvasToolbar"
 ```
 
 ## Author
