@@ -8,36 +8,66 @@
 
 import UIKit
 
-/*
-*/
+/**
+ CanvasToolbarの変更やボタンが押されたことを受け取るdelegate
+ */
 public protocol CanvasToolbarDelegate {
     /**
      種類をペン、消しゴム、カットから選択
-
      - parameter penState: これから変更されるペンの状態
-
-     - returns 変更の許可不許可
+     - returns: 変更の許可不許可
     */
-    func changePenState(penState:CanvasToolbar.PenState) -> Bool
+    func willChangePenState(penState:CanvasToolbar.PenState) -> Bool
     
-    // 色を変更
-    func changeColor(colorIndex:Int) -> Bool
+    /**
+     パレットから色を変更
+     - parameter colorIndex: 変更されるカラー番号(colorsのインデックス)
+     - returns: 変更の許可不許可
+    */
+    func willChangeColor(colorIndex:Int) -> Bool
     
-    // ペンの太さを変更した
+    /**
+     ペンの太さを変更した
+     - parameter weight: ペンの太さ
+    */
     func didChangeDrawWeight(weight:Int)
     
-    // Actions
+    /// Undoボタンが押された
     func didPressUndo()
+    
+    // Redoボタンが押された
     func didPressRedo()
+    
+    /// カメラボタンが押された
     func didPressCamera() // 未実装
+    
+    /// イメージライブラリボタンが押された
     func didPressImageLibrary() // 未実装
+    
+    /// イメージ削除ボタンが押された
     func didPressClearImage() // 未実装
+    
+    /// 設定ボタンが押された
     func didPressSetting()
+    
+    /// 出力ボタンが押された
     func didPressExport()
+    
+    /// 終了ボタンが押された
     func didPressExit()
 }
 
+/**
+ ツールバーのコンポーネント
+ 
+ init後にframeで大きさが決定されているので、適当な位置に配置してください。
+ 
+ ex)
+ ```
+ ```
+ */
 public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
+    /// delegate
     public var delegate:CanvasToolbarDelegate?
     
     var drawBtn:UIButton!
@@ -75,7 +105,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         }
     }
     
-    // 現在activeな色
+    // 現在activeな色が有効か
     public var activeColors:[Bool] {
         didSet(colors) {
             for (index, palette) in palettes.enumerated() {
@@ -96,6 +126,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     
     var bundle:Bundle!
     
+    /// Undoボタンが有効か
     public var undoIsEnabled:Bool {
         set {
             undoBtn.isEnabled = newValue
@@ -105,6 +136,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         }
     }
 
+    /// Redoボタンが有効か
     public var redoIsEnabled:Bool {
         set {
             redoBtn.isEnabled = newValue
@@ -113,13 +145,14 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
             return redoBtn.isEnabled
         }
     }
-    // 対象レイヤーが1枚か全部か
+    
+    /// 対象レイヤーが1枚か全部か
     public enum Layer {
         case single
         case multiple
     }
     
-    // 選択されてるペンの状態
+    /// 選択されてるペンの状態
     public enum PenState {
         case draw
         case eraseSingle
@@ -129,14 +162,17 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     }
     
     // 表示されているsubmenu
-    public enum SubMenu {
+    enum SubMenu {
         case none
         case erase
         case cut
         case image
     }
     
-    // ペンの太さ
+    /**
+     ペンの太さ
+     現在 4, 8 16が設定可能
+    */
     public var drawWeight:Int {
         set {
             guard let index = drawWeightValues.index(of: newValue) else { return }
@@ -149,7 +185,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         }
     }
     
-    // eraseのレイヤー指定
+    /// eraseのレイヤー指定
     public var eraseLayer:Layer {
         set(layer) {
             eraseSingleBtn.isHidden = !(layer == .single)
@@ -165,7 +201,8 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
             return eraseSingleBtn.isHidden ? .multiple : .single
         }
     }
-    // cutのレイヤー指定
+    
+    /// cutのレイヤー指定
     public var cutLayer:Layer {
         set(layer) {
             cutSingleBtn.isHidden = !(layer == .single)
@@ -182,10 +219,10 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         }
     }
     
-    // 現在選択中のペンの種類
-    var penState:PenState = .draw {
+    /// 現在選択中のペンの種類
+    public var penState:PenState = .draw {
         didSet(oldPenState) {
-            if delegate?.changePenState(penState: penState) ?? true {
+            if delegate?.willChangePenState(penState: penState) ?? true {
                 drawBtn.isSelected = (penState == .draw)
                 eraseSingleBtn.isSelected = (penState == .eraseSingle || penState == .eraseMultiple)
                 eraseMultipleBtn.isSelected = (penState == .eraseSingle || penState == .eraseMultiple)
@@ -195,7 +232,11 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         }
     }
 
-    // 初期化してボタンを配置
+
+    /**
+     初期化してボタンを配置
+     parameter colors: パレットの色の配列 6コ設定する
+     */
     public init(colors:[UIColor]) {
         self.colors = colors
         self.activeColors = colors.map { _ in true }
@@ -457,7 +498,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         guard let value = btn.accessibilityValue else { return }
         guard let index = Int(value) else { return }
         
-        if delegate?.changeColor(colorIndex: index) ?? true {
+        if delegate?.willChangeColor(colorIndex: index) ?? true {
             self.colorIndex = index
         }
     }
