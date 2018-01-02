@@ -321,10 +321,12 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-CanvasToolbar_Example/Pods-CanvasToolbar_Example-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CanvasToolbar/CanvasToolbar.framework",
+				"${BUILT_PRODUCTS_DIR}/PKHUD/PKHUD.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CanvasToolbar.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PKHUD.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

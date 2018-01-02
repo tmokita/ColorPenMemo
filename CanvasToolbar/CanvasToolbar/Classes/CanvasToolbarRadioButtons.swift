@@ -10,6 +10,7 @@ import UIKit
 
 protocol CanvasToolbarRadioButtonsProtocol {
     func didChangeSubmenuValue(sender: CanvasToolbarRadioButtons)
+    func closeSubmenu()
 }
 
 class CanvasToolbarRadioButtons: UIView {
@@ -26,6 +27,9 @@ class CanvasToolbarRadioButtons: UIView {
             }
             if oldValue != value {
                 delegate?.didChangeSubmenuValue(sender:self)
+            }
+            else {
+                delegate?.closeSubmenu()
             }
         }
     }

@@ -1,9 +1,11 @@
 #!/bin/sh
 
 mkdir -p _site
-rm _site/*
+rm -Rf _site/*
 
+(
+cd CanvasToolbar &&
 jazzy \
-  --output _site \
-  --min-acl public \
-  --podspec CanvasToolbar/CanvasToolbar.podspec
+  --output "../_site/CanvasToolbar" \
+  --podspec "CanvasToolbar.podspec"
+)
