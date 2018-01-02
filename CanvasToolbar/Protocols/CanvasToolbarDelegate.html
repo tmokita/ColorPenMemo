@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CanvasToolbarDelegate Protocol Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Protocol/CanvasToolbarDelegate" class="dashAnchor"></a>
+    <a title="CanvasToolbarDelegate Protocol Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">CanvasToolbar Docs</a> (70% documented)</p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">CanvasToolbar Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        CanvasToolbarDelegate Protocol Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/CanvasToolbar.html">CanvasToolbar</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CanvasToolbar/Layer.html">– Layer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/CanvasToolbar/PenState.html">– PenState</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/CanvasToolbarDelegate.html">CanvasToolbarDelegate</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>CanvasToolbarDelegate</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">protocol</span> <span class="kt">CanvasToolbarDelegate</span></code></pre>
+
+                </div>
+              </div>
+            <p>CanvasToolbarの変更やボタンが押されたことを受け取るdelegate</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP18willChangePenStateSbA2AC0fG0O03penG0_tF"></a>
+                    <a name="//apple_ref/swift/Method/willChangePenState(penState:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP18willChangePenStateSbA2AC0fG0O03penG0_tF">willChangePenState(penState:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>種類をペン、消しゴム、カットから選択</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">willChangePenState</span><span class="p">(</span><span class="nv">penState</span><span class="p">:</span><span class="kt"><a href="../Classes/CanvasToolbar.html">CanvasToolbar</a></span><span class="o">.</span><span class="kt">PenState</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>penState</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>これから変更されるペンの状態</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>変更の許可不許可</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP15willChangeColorSbSi10colorIndex_tF"></a>
+                    <a name="//apple_ref/swift/Method/willChangeColor(colorIndex:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP15willChangeColorSbSi10colorIndex_tF">willChangeColor(colorIndex:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>パレットから色を変更</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">willChangeColor</span><span class="p">(</span><span class="nv">colorIndex</span><span class="p">:</span><span class="kt">Int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>colorIndex</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>変更されるカラー番号(colorsのインデックス)</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>変更の許可不許可</p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP19didChangeDrawWeightySi6weight_tF"></a>
+                    <a name="//apple_ref/swift/Method/didChangeDrawWeight(weight:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP19didChangeDrawWeightySi6weight_tF">didChangeDrawWeight(weight:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>ペンの太さを変更した</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didChangeDrawWeight</span><span class="p">(</span><span class="nv">weight</span><span class="p">:</span><span class="kt">Int</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>weight</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>ペンの太さ</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP12didPressUndoyyF"></a>
+                    <a name="//apple_ref/swift/Method/didPressUndo()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP12didPressUndoyyF">didPressUndo()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undoボタンが押された</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didPressUndo</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP12didPressRedoyyF"></a>
+                    <a name="//apple_ref/swift/Method/didPressRedo()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP12didPressRedoyyF">didPressRedo()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Undocumented</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didPressRedo</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP14didPressCamerayyF"></a>
+                    <a name="//apple_ref/swift/Method/didPressCamera()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP14didPressCamerayyF">didPressCamera()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>カメラボタンが押された</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didPressCamera</span><span class="p">()</span> <span class="c1">// 未実装</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP20didPressImageLibraryyyF"></a>
+                    <a name="//apple_ref/swift/Method/didPressImageLibrary()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP20didPressImageLibraryyyF">didPressImageLibrary()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>イメージライブラリボタンが押された</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didPressImageLibrary</span><span class="p">()</span> <span class="c1">// 未実装</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP18didPressClearImageyyF"></a>
+                    <a name="//apple_ref/swift/Method/didPressClearImage()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP18didPressClearImageyyF">didPressClearImage()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>イメージ削除ボタンが押された</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didPressClearImage</span><span class="p">()</span> <span class="c1">// 未実装</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP15didPressSettingyyF"></a>
+                    <a name="//apple_ref/swift/Method/didPressSetting()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP15didPressSettingyyF">didPressSetting()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>設定ボタンが押された</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didPressSetting</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP14didPressExportyyF"></a>
+                    <a name="//apple_ref/swift/Method/didPressExport()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP14didPressExportyyF">didPressExport()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>出力ボタンが押された</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didPressExport</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:13CanvasToolbar0aB8DelegateP12didPressExityyF"></a>
+                    <a name="//apple_ref/swift/Method/didPressExit()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:13CanvasToolbar0aB8DelegateP12didPressExityyF">didPressExit()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>終了ボタンが押された</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">func</span> <span class="nf">didPressExit</span><span class="p">()</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2018 <a class="link" href="https://github.com/Yuichiro MASUI/CanvasToolbar" target="_blank" rel="external">Yuichiro MASUI</a>. All rights reserved. (Last updated: 2018-01-02)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.0</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>
