@@ -23,3 +23,12 @@
 - [ドキュメント](https://tmokita.github.io/ColorPenMemo/CanvasToolbar)
 - お絵かき部の左に出るツールバーを提供するPod
 - 責任範囲を切り分けるために切り出した
+
+### TODO
+- 現在のペンの太さをアイコンの右下に表示
+- 画像ボタンのsubmenu実装
+- orientationが変わった時に位置変更
+- submenu出したときに範囲外をタップで閉じる
+- 最小化ボタンと最小化を実装
+- 設定に何を入れるか考える
+- menuのlong pressの押し心地を調整
