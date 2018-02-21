@@ -37,7 +37,8 @@ class ViewController: UIViewController {
         setup()
         
         toolbar = CanvasToolbar(colors: [.gray, .red, .blue, .green, .brown, .cyan])
-        let middle = Int(UIScreen.main.bounds.height - toolbar.frame.height) / 2
+        let middle = toolbar.middleOf(height: Double(self.view.frame.size.height))
+
         toolbar.frame = CGRect(origin: CGPoint(x:0, y:middle), size: toolbar.frame.size)
         self.view.addSubview(toolbar)
         // toolbar.redoIsEnabled = false

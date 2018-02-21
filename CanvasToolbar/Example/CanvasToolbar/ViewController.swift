@@ -22,8 +22,7 @@ class ViewController: UIViewController, CanvasToolbarDelegate {
         toolbar = CanvasToolbar(colors: [.gray, .red, .blue, .green, .brown, .cyan])
         toolbar.delegate = self
         
-        let middle = Int(UIScreen.main.bounds.height - toolbar.frame.height) / 2
-        toolbar.frame = CGRect(origin: CGPoint(x:0, y:middle), size: toolbar.frame.size)
+        toolbar.frame = CGRect(origin: CGPoint(x:0, y: toolbar.middleOf(height: Double(self.view.frame.size.height))), size: toolbar.frame.size)
         self.view.addSubview(toolbar)
     }
     
@@ -89,6 +88,14 @@ class ViewController: UIViewController, CanvasToolbarDelegate {
     
     func didPressExit() {
         log("Exit")
+    }
+    
+    func didShowToolbar() {
+        log("Show toolbar")
+    }
+    
+    func didHideToolbar() {
+        log("Hide toolbar")
     }
 }
 

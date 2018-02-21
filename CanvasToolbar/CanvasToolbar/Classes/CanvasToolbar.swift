@@ -59,6 +59,12 @@ public protocol CanvasToolbarDelegate {
     
     /// 終了ボタンが押された
     func didPressExit()
+    
+    /// ツールバーが表示された
+    func didShowToolbar()
+    
+    /// ツールバーが非表示になった
+    func didHideToolbar()
 }
 
 /**
@@ -70,6 +76,10 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     /// delegate
     public var delegate:CanvasToolbarDelegate?
     
+    // メインボタンを置く部分のView
+    var bodyView:UIView!
+    
+    // ボタン群
     var drawBtn:UIButton!
     var eraseSingleBtn:UIButton!
     var eraseMultipleBtn:UIButton!
@@ -82,6 +92,9 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     var settingBtn:UIButton!
     var exportBtn:UIButton!
     var exitBtn:UIButton!
+    
+    var hideBtn:UIButton!
+    var showBtn:UIButton!
     
     // ペンの太さとイメージ
     var drawWeightImages:[String] = ["DrawSmall", "DrawMedium", "DrawLarge"]
@@ -181,6 +194,12 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         case image
     }
     
+    // ツールバーが表示されているか
+    public enum Visibility {
+        case shown
+        case hidden
+    }
+    
     /**
      ペンの太さ
      現在 4, 8 16が設定可能
@@ -256,6 +275,38 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
             delegate?.didChangePenState(penState: penState)
         }
     }
+    
+    /// ツールバーの表示・非表示
+    /// アニメーションします
+    public var visibility:Visibility = .shown {
+        didSet(oldVisibility) {
+            if oldVisibility != visibility {
+                let duration = 0.5
+                let movement = self.bodyView.frame.size.width * -1
+                switch visibility {
+                case .shown:
+                    self.hideBtn.frame.origin.x = movement
+                    UIView.animate(withDuration: duration, delay: 0.0, animations: {
+                        self.showBtn.frame.origin.x = movement
+                        self.hideBtn.frame.origin.x = 0
+                        self.bodyView.frame.origin.x = 0
+                    }, completion: nil)
+                    delegate?.didShowToolbar()
+                    
+                case .hidden:
+                    UIView.animate(withDuration: duration, delay: 0.0, animations: {
+                        self.hideBtn.frame.origin.x = movement
+                        self.bodyView.frame.origin.x = movement
+                    }, completion: nil)
+                    let ratio = Double(self.hideBtn.frame.origin.x / self.bodyView.frame.origin.x)
+                    UIView.animate(withDuration: duration * ratio, delay: duration * (1.0 - ratio), animations: {
+                        self.showBtn.frame.origin.x = 0
+                    }, completion: nil)
+                    delegate?.didHideToolbar()
+                }
+            }
+        }
+    }
 
 
     /**
@@ -270,31 +321,81 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
 
         loadBundle()
         
-        createPenStateButtons()
-        createPalette()
-        createActionButtons()
-        createSubmenus()
+        // 表示・非表示ボタン
+        createVisibilityButton()
+        
+        // ツールバー本体部分を生成
+        bodyView = UIView(frame: CGRect(x: 0, y: 24, width: 64, height: 620))
+        createPenStateButtons(view: bodyView)
+        createPalette(view: bodyView)
+        createActionButtons(view: bodyView)
+        createSubmenus(view: bodyView)
+        addSubview(bodyView)
+        
+        // 初期値設定
         setInitValues()
     }
     
+    /**
+     中央になるy座標を取得
+     
+     - return Y座標
+     */
+    public func middleOf(height:Double) -> Double {
+        return (height - Double(bodyView.frame.size.height)) / 2.0 - Double(showBtn.frame.size.height)
+    }
+    
+    // 画像リソースを読み込み
     private func loadBundle() {
         let podBundle = Bundle(for: self.classForCoder)
         let bundleURL = podBundle.url(forResource: "CanvasToolbar", withExtension: "bundle")!
         bundle = Bundle(url: bundleURL)!
     }
     
+    // 初期値を設定
     private func setInitValues() {
         colorIndex = 0
         drawWeight = .medium
         eraseLayer = .single
         cutLayer = .multiple
+        visibility = .shown
     }
 
+    // ツールバーの表示・非表示ボタン
+    func createVisibilityButton() {
+        let hideImg = loadImage("HideActive")!
+        hideBtn = UIButton(frame: CGRect(origin: CGPoint(x: 0, y: 0), size: hideImg.size))
+        hideBtn.accessibilityValue = "HideToolbar"
+        hideBtn.setImage(hideImg, for: .normal)
+        hideBtn.addTarget(self, action: #selector(didTapVisibilityButton), for: .touchUpInside)
+        addSubview(hideBtn)
+
+        let showImg = loadImage("ShowActive")!
+        showBtn = UIButton(frame: CGRect(origin: CGPoint(x: -hideImg.size.width, y: 0), size: hideImg.size))
+        showBtn.accessibilityValue = "ShowToolbar"
+        showBtn.setImage(showImg, for: .normal)
+        showBtn.addTarget(self, action: #selector(didTapVisibilityButton), for: .touchUpInside)
+        addSubview(showBtn)
+    }
+    
+    // 表示・非表示ボタンをタップ
+    @objc func didTapVisibilityButton(sender: AnyObject) {
+        guard let btn = sender as? UIButton else { return }
+        switch btn.accessibilityValue ?? "" {
+        case "ShowToolbar":
+            visibility = .shown
+        case "HideToolbar":
+            visibility = .hidden
+        default:
+            break
+        }
+    }
+    
     // パレットを生成
-    private func createPalette() {
+    private func createPalette(view: UIView) {
         paletteBG = UIImageView(frame: CGRect(x: 0, y: 288, width: 64, height: 256))
         paletteBG.image = loadImage("PaletteBackgroundActive")
-        addSubview(paletteBG)
+        view.addSubview(paletteBG)
 
         for (index, color) in colors.enumerated() {
             let palette = UIButton(type: .custom)
@@ -303,7 +404,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
             palette.accessibilityValue = String(index)
             palette.addTarget(self, action: #selector(didTapPaletteButton), for: .touchUpInside)
             palettes.append(palette)
-            addSubview(palette)
+            view.addSubview(palette)
         }
         
         // カーソル
@@ -312,16 +413,16 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         paletteCursor.image = cursorImage
         paletteCursor.isUserInteractionEnabled = false
         paletteCursor.isHidden = true
-        addSubview(paletteCursor)
+        view.addSubview(paletteCursor)
     }
     
     // ペンの状態変更を行うボタン群を生成
-    private func createPenStateButtons() {
-        drawBtn = addButton(name: "DrawMain", x: 0, y: 0, action: #selector(didTapPenStateButton), longPressAction: #selector(didLongPressButton))
-        eraseSingleBtn = addButton(name: "EraseMainSingle", x: 0, y: 64, action: #selector(didTapPenStateButton), longPressAction: #selector(didLongPressButton))
-        eraseMultipleBtn = addButton(name: "EraseMainMultiple", x: 0, y: 64, action: #selector(didTapPenStateButton), longPressAction: #selector(didLongPressButton))
-        cutSingleBtn = addButton(name: "CutMainSingle", x: 0, y: 128, action: #selector(didTapPenStateButton), longPressAction: #selector(didLongPressButton))
-        cutMultipleBtn = addButton(name: "CutMainMultiple", x: 0, y: 128, action: #selector(didTapPenStateButton), longPressAction: #selector(didLongPressButton))
+    private func createPenStateButtons(view: UIView) {
+        drawBtn = addButton(view: view, name: "DrawMain", x: 0, y: 0, action: #selector(didTapPenStateButton), longPressAction: #selector(didLongPressButton))
+        eraseSingleBtn = addButton(view: view, name: "EraseMainSingle", x: 0, y: 64, action: #selector(didTapPenStateButton), longPressAction: #selector(didLongPressButton))
+        eraseMultipleBtn = addButton(view: view, name: "EraseMainMultiple", x: 0, y: 64, action: #selector(didTapPenStateButton), longPressAction: #selector(didLongPressButton))
+        cutSingleBtn = addButton(view: view, name: "CutMainSingle", x: 0, y: 128, action: #selector(didTapPenStateButton), longPressAction: #selector(didLongPressButton))
+        cutMultipleBtn = addButton(view: view, name: "CutMainMultiple", x: 0, y: 128, action: #selector(didTapPenStateButton), longPressAction: #selector(didLongPressButton))
         drawBtn.isSelected = true // 初期値は.draw
     }
     
@@ -377,7 +478,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     }
     
     // Submenuを生成
-    private func createSubmenus() {
+    private func createSubmenus(view: UIView) {
         drawWeightMenu = CanvasToolbarRadioButtons(
             origin: CGPoint(x: drawBtn.frame.maxX, y: drawBtn.frame.minY),
             images: drawWeightImages
@@ -385,7 +486,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         drawWeightMenu?.delegate = self
         drawWeightMenu?.isHidden = true
         drawWeightMenu?.name = "Draw"
-        addSubview(drawWeightMenu!)
+        view.addSubview(drawWeightMenu!)
 
         eraseLayerMenu = CanvasToolbarRadioButtons(
             origin: CGPoint(x: eraseSingleBtn.frame.maxX, y: eraseSingleBtn.frame.minY),
@@ -394,7 +495,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         eraseLayerMenu?.delegate = self
         eraseLayerMenu?.isHidden = true
         eraseLayerMenu?.name = "Erase"
-        addSubview(eraseLayerMenu!)
+        view.addSubview(eraseLayerMenu!)
 
         cutLayerMenu = CanvasToolbarRadioButtons(
             origin: CGPoint(x: cutSingleBtn.frame.maxX, y: cutSingleBtn.frame.minY),
@@ -403,7 +504,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         cutLayerMenu?.delegate = self
         cutLayerMenu?.isHidden = true
         cutLayerMenu?.name = "Cut"
-        addSubview(cutLayerMenu!)
+        view.addSubview(cutLayerMenu!)
     }
     
     // Submenuを表示
@@ -450,13 +551,13 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     }
 
     // アクションボタン群を生成
-    private func createActionButtons() {
-        imageBtn = addButton(name: "ImageMain", x: 0, y: 192, action: #selector(didTapActionButton))
-        undoBtn = addButton(name: "Undo", x: 0, y: 240, action: #selector(didTapActionButton))
-        redoBtn = addButton(name: "Redo", x: 32, y: 240, action: #selector(didTapActionButton))
-        settingBtn = addButton(name: "Setting", x: 0, y: 544, action: #selector(didTapActionButton))
-        exportBtn = addButton(name: "Export", x: 32, y: 544, action: #selector(didTapActionButton))
-        exitBtn = addButton(name: "Exit", x: 0, y: 592, action: #selector(didTapActionButton))
+    private func createActionButtons(view: UIView) {
+        imageBtn = addButton(view: view, name: "ImageMain", x: 0, y: 192, action: #selector(didTapActionButton))
+        undoBtn = addButton(view: view, name: "Undo", x: 0, y: 240, action: #selector(didTapActionButton))
+        redoBtn = addButton(view: view, name: "Redo", x: 32, y: 240, action: #selector(didTapActionButton))
+        settingBtn = addButton(view: view, name: "Setting", x: 0, y: 544, action: #selector(didTapActionButton))
+        exportBtn = addButton(view: view, name: "Export", x: 32, y: 544, action: #selector(didTapActionButton))
+        exitBtn = addButton(view: view, name: "Exit", x: 0, y: 592, action: #selector(didTapActionButton))
     }
     
     @objc func didTapActionButton(sender: AnyObject) {
@@ -480,7 +581,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
     }
     
     // イメージ付きボタンを生成
-    private func addButton(name:String, x: Int, y:Int, action:Selector, longPressAction:Selector? = nil) -> UIButton {
+    private func addButton(view: UIView, name:String, x: Int, y:Int, action:Selector, longPressAction:Selector? = nil) -> UIButton {
         let activeImg = loadImage("\(name)Active")!
         let deactiveImg = loadImage("\(name)Deactive")!
         
@@ -512,7 +613,7 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
             )
         )
         
-        addSubview(btn)
+        view.addSubview(btn)
         return btn
     }
     
