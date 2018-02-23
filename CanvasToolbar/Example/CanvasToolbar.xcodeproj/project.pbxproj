@@ -220,6 +220,7 @@
 					};
 					607FACE41AFB9204008FA782 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = PWV39F9LF9;
 						LastSwiftMigration = 0900;
 						TestTargetID = 607FACCF1AFB9204008FA782;
 					};
@@ -564,6 +565,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 73D9015DBE180E63260B7811 /* Pods-CanvasToolbar_Tests.debug.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = PWV39F9LF9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -585,6 +587,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 018664A13DFEA8941BCD5D39 /* Pods-CanvasToolbar_Tests.release.xcconfig */;
 			buildSettings = {
+				DEVELOPMENT_TEAM = PWV39F9LF9;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",

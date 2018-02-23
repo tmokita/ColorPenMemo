@@ -326,14 +326,16 @@ public class CanvasToolbar: UIView, CanvasToolbarRadioButtonsProtocol {
         
         // ツールバー本体部分を生成
         bodyView = UIView(frame: CGRect(x: 0, y: 24, width: 64, height: 620))
-        createPenStateButtons(view: bodyView)
-        createPalette(view: bodyView)
-        createActionButtons(view: bodyView)
-        createSubmenus(view: bodyView)
+        //createPenStateButtons(view: bodyView)
+        //createPalette(view: bodyView)
+        //createActionButtons(view: bodyView)
+        //createSubmenus(view: bodyView)
+        let bwm = CanvasToolbarButtonWithMenu(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        bodyView.addSubview(bwm)
         addSubview(bodyView)
         
         // 初期値設定
-        setInitValues()
+        //setInitValues()
     }
     
     /**
